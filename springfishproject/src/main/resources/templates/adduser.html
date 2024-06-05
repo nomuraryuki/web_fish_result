@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ユーザー新規登録</title>
+    <link href="/css/commons.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="insert">
+        <div class="discription">
+            <p>
+                登録情報を入力してください（<span class="required"></span>は必須です）
+            </p>
+        </div>
+        <p class="error" th:text="${errorMessage}"></p>
+        <div class="form-body">
+            <form action="/adduser" method="post" th:object="${addUserForm}">
+                <fieldset class="label-130">
+                    <div>
+                        <label class="required">ログインID</label>
+                        <input type="text" th:field="*{addUserLoginId}" name="loginId" class="base-text">
+                        <div class="error" th:each="error: ${#fields.errors('addUserLoginId')}">
+                            [[ ${error} ]]
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="required">パスワード</label>
+                        <input type="password" th:field="*{addUserPassword}" name="password" class="base-text">
+                        <div class="error" th:each="error: ${#fields.errors('addUserPassword')}">
+                            [[ ${error} ]]
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="required">名前</label>
+                        <input type="text" th:field="*{addUserName}" name="username" class="base-text">
+                        <div class="error" th:each="error: ${#fields.errors('addUserName')}">
+                            [[ ${error} ]]
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="btns">
+                    <button type="button" onclick="openModal()" class="basic-btn">登録</button>
+                    <input type="button" onclick="location.href='/login'" value="戻る" class="cancel-btn">
+                </div>
+                <div id="modal">
+                    <p class="modal-message">登録しますか？</p>
+                    <div class="btns">
+                        <button type="submit" id="register-btn" class="basic-btn">登録</button>
+                        <button type="button" onclick="closeModal()" class="cancel-btn">キャンセル</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="fadeLayer"></div>
+<script src="/js/commons.js"></script>
+<script>
+    'use strict'
+    document.getElementById('register-btn').addEventListener('click', () => {
+      location.href = '/login'
+    })
+</script>
+</body>
+</html>
