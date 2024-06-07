@@ -7,45 +7,51 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
-    <th:block th:insert="common/header"></th:block>
+<th:block th:insert="common/header"></th:block>
 
 <!--    <input type="button" value="情報一覧ページ" onclick="/infolist"/></br>-->
-    <button onclick="loction.href='http://localhost:8080/infolist'">情報一覧ページ</button>
-    <div class="imagemap">
-    <img src="../img/沖縄県.jpg" usemap="#ImageMap" alt="" width="300" height="300"/>
+<p>
+    <a href="/infolist">
+        <button>情報一覧ページ</button>
+    </a>
+</p>
+
+<div class="imagemap">
+    <img src="../img/沖縄県.jpg" usemap="#ImageMap" alt="" id="okinawaIMG"/>
     <map class="a-hover" name="ImageMap">
-        <area shape="rect" coords="879,50,1003,92" href="#" alt="国頭村" />
-        <area shape="rect" coords="724,136,885,177" href="#" alt="大宜味村" />
-        <area shape="rect" coords="575,223,732,272" href="#" alt="今帰仁村" />
-        <area shape="rect" coords="366,171,494,214" href="#" alt="伊江村" />
-        <area shape="rect" coords="1094,488,1179,536" href="#" alt="東村" />
-        <area shape="rect" coords="1015,639,1139,674" href="#" alt="名護市" />
-        <area shape="rect" coords="906,697,1061,741" href="#" alt="宜野座村" />
-        <area shape="rect" coords="828,759,952,797" href="#" alt="金武村" />
-        <area shape="rect" coords="265,503,381,568" href="#" alt="本部町" />
-        <area shape="rect" coords="325,604,442,656" href="#" alt="恩納村" />
-        <area shape="rect" coords="145,679,275,726" href="#" alt="読谷村" />
-        <area shape="rect" coords="79,828,232,875" href="#" alt="嘉手納町" />
-        <area shape="rect" coords="100,898,221,942" href="#" alt="北谷町" />
-        <area shape="rect" coords="52,957,216,1011" href="#" alt="宜野湾市" />
-        <area shape="rect" coords="778,893,947,946" href="#" alt="うるま市" />
-        <area shape="rect" coords="780,1029,909,1082" href="#" alt="沖縄市" />
-        <area shape="rect" coords="649,1089,810,1134" href="#" alt="北中城村" />
-        <area shape="rect" coords="460,1085,581,1133" href="https://www3.jeed.go.jp/okinawa/college/" alt="中城村" />
-        <area shape="rect" coords="74,1029,195,1077" href="#" alt="浦添市" />
-        <area shape="rect" coords="41,1117,157,1162" href="#" alt="那覇市" />
-        <area shape="rect" coords="18,1210,170,1261" href="#" alt="豊見城市" />
-        <area shape="rect" coords="36,1300,158,1347" href="#" alt="糸満市" />
-        <area shape="rect" coords="938,1145,1061,1187" href="#" alt="西原町" />
-        <area shape="rect" coords="817,1189,974,1237" href="#" alt="与那原町" />
-        <area shape="rect" coords="581,1255,701,1307" href="#" alt="南城市" />
-        <area shape="rect" coords="749,1292,910,1346" href="#" alt="南風原町" />
-        <area shape="rect" coords="373,1333,531,1382" href="#" alt="八重瀬町" />
+        <area shape="rect" coords="879,50,1003,92" th:href="@{/place/{locate}(locate=国頭村)}" alt="国頭村" class="kuni"/>
+        <area shape="rect" coords="724,136,885,177" th:href="@{/place/{locate}(locate=大宜味村)}" alt="大宜味村"/>
+        <area shape="rect" coords="575,223,732,272" th:href="@{/place/{locate}(locate=今帰仁村)}" alt="今帰仁村"/>
+        <area shape="rect" coords="366,171,494,214" th:href="@{/place/{locate}(locate=伊江村)}" alt="伊江村"/>
+        <area shape="rect" coords="1094,488,1179,536" th:href="@{/place/{locate}(locate=東村)}" alt="東村"/>
+        <area shape="rect" coords="1015,639,1139,674" th:href="@{/place/{locate}(locate=名護市)}" alt="名護市"/>
+        <area shape="rect" coords="906,697,1061,741" th:href="@{/place/{locate}(locate=宜野座村)}" alt="宜野座村"/>
+        <area shape="rect" coords="828,759,952,797" th:href="@{/place/{locate}(locate=金武町)}" alt="金武町"/>
+        <area shape="rect" coords="265,503,381,568" th:href="@{/place/{locate}(locate=本部町)}" alt="本部町"/>
+        <area shape="rect" coords="325,604,442,656" th:href="@{/place/{locate}(locate=恩納村)}" alt="恩納村"/>
+        <area shape="rect" coords="145,679,275,726" th:href="@{/place/{locate}(locate=読谷村)}" alt="読谷村"/>
+        <area shape="rect" coords="79,828,232,875" th:href="@{/place/{locate}(locate=嘉手納町)}" alt="嘉手納町"/>
+        <area shape="rect" coords="100,898,221,942" th:href="@{/place/{locate}(locate=北谷町)}" alt="北谷町"/>
+        <area shape="rect" coords="52,957,216,1011" th:href="@{/place/{locate}(locate=宜野湾市)}" alt="宜野湾市"/>
+        <area shape="rect" coords="778,893,947,946" th:href="@{/place/{locate}(locate=うるま市)}" alt="うるま市"/>
+        <area shape="rect" coords="780,1029,909,1082" th:href="@{/place/{locate}(locate=沖縄市)}" alt="沖縄市"/>
+        <area shape="rect" coords="649,1089,810,1134" th:href="@{/place/{locate}(locate=北中城村)}" alt="北中城村"/>
+        <area shape="rect" coords="460,1085,581,1133" href="https://www3.jeed.go.jp/okinawa/college/" alt="中城村"/>
+        <area shape="rect" coords="74,1029,195,1077" th:href="@{/place/{locate}(locate=浦添市)}" alt="浦添市"/>
+        <area shape="rect" coords="41,1117,157,1162" th:href="@{/place/{locate}(locate=那覇市)}" alt="那覇市"/>
+        <area shape="rect" coords="18,1210,170,1261" th:href="@{/place/{locate}(locate=豊見城市)}" alt="豊見城市"/>
+        <area shape="rect" coords="36,1300,158,1347" th:href="@{/place/{locate}(locate=糸満市)}" alt="糸満市"/>
+        <area shape="rect" coords="938,1145,1061,1187" th:href="@{/place/{locate}(locate=西原町)}" alt="西原町"/>
+        <area shape="rect" coords="817,1189,974,1237" th:href="@{/place/{locate}(locate=与那原町)}" alt="与那原町"/>
+        <area shape="rect" coords="581,1255,701,1307" th:href="@{/place/{locate}(locate=南城市)}" alt="南城市"/>
+        <area shape="rect" coords="749,1292,910,1346" th:href="@{/place/{locate}(locate=南風原町)}" alt="南風原町"/>
+        <area shape="rect" coords="373,1333,531,1382" th:href="@{/place/{locate}(locate=八重瀬町)}" alt="八重瀬町"/>
+        <area shape="poly" coords="225,1244,222,1241,204,1225,201,1216,214,1204,231,1207,244,1200,250,1185,278,1183,287,1206,279,1222,279,1230,266,1229,254,1238,243,1238,230,1247,223,1241,264,1210" href="/secret" alt="" />
     </map>
     <p>ホバーされました</p>
-    </div>
-    <script src="https://unpkg.com/image-map-resizer@1.0.10/js/imageMapResizer.min.js"></script>
-    <script>imageMapResize();</script>
+</div>
+<script src="https://unpkg.com/image-map-resizer@1.0.10/js/imageMapResizer.min.js"></script>
+<script>imageMapResize();</script>
 
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>メニュー</title>
+    <title>[[ ${locate} ]]の釣果</title>
     <link href="/css/commons.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
@@ -13,8 +13,9 @@
 
     <div class="btn-area">
         <div class="btn"><a class="basic-btn regist" th:if="${session.user.role} == 1" href="/insert">新規登録</a></div>
-<!--        <div class="btn"><a class="basic-btn regist" href="category.html">カテゴリ管理</a></div>-->
+        <!--        <div class="btn"><a class="basic-btn regist" href="category.html">カテゴリ管理</a></div>-->
     </div>
+    <h2>[[ ${locate} ]]の釣果</h2>
     <p th:text="${MenuMessage}"></p>
 
     <span class="search-form">
@@ -30,7 +31,7 @@
           <option>単価：高い順</option>
         </select>
       </div>
-      <form  method="get" th:object="${SearchFishNameFrom}" action="/menu/search"  >
+      <form method="get" th:object="${SearchFishNameFrom}" action="/menu/search">
         <div class="search-container">
 <!--          <input type="text"  th:field="*{searchName}" name="keyword" size="25" placeholder="キーワード検索">-->
           <input type="submit" value="&#xf002">
@@ -38,7 +39,12 @@
       </form>
     </span>
     <table>
-        <div class="caption"><p >検索結果：[[ ${countDB} ]]件</p></div>
+        <div class="caption"><p>釣果：[[ ${countDB} ]]匹</p></div>
+        <div class="panelbox" th:each="result : ${resultList}">
+<!--            <a th:href="@{/detail/{id}(id=${result.id()})}" >-->
+                <img th:src="@{../img/__${result.img_path()}__}" alt="" th:if="${result.img_path()} != null">
+<!--            </a>-->
+        </div>
 
         <thead>
         <tr>
@@ -53,15 +59,15 @@
         </tr>
         </thead>
         <tbody>
-            <tr th:each="result : ${resultList}">
-                <td th:text="${result.fish_name}"></td>
-                <td th:text="${result.fish_size}"></td>
-                <td th:text="${result.dating}"></td>
-                <td th:text="${result.weather}"></td>
-                <td th:text="${result.tide_kinds}"></td>
-                <td th:text="${result.place_name}"></td>
-                <td><a class="detail_btn" th:href="@{/detail/{pId}(pId=${result.id})}">詳細</a></td>
-            </tr>
+        <tr th:each="result : ${resultList}">
+            <td th:text="${result.fish_name}"></td>
+            <td th:text="${result.fish_size}"></td>
+            <td th:text="${result.dating}"></td>
+            <td th:text="${result.weather}"></td>
+            <td th:text="${result.tide_kinds}"></td>
+            <td th:text="${result.place_name}"></td>
+            <td><a class="detail_btn" th:href="@{/detail/{pId}(pId=${result.id})}">詳細</a></td>
+        </tr>
         </tbody>
     </table>
 </div>

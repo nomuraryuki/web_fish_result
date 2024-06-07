@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>釣果更新</title>
+    <link href="/css/commons.css" rel="stylesheet">
+</head>
+<body>
+<th:block th:insert="common/header"></th:block>
+
+<hr>
+
+<div class="insert">
+    <div class="form-body">
+        <!--      <p class="error" th:text="${errorUpdateMessage}"></p>-->
+
+        <form th:action="@{/updateInput/{id}(id=${fishData.id()})}" method="post" th:object="${addResultFishingForm}"
+              　enctype="multipart/form-data">
+            <fieldset class="label-130">
+
+                <div>
+                    <label class="required">魚名</label>
+                    <input type="text" th:field="*{addFishName}" name="productId" class="base-text">
+                    <div class="error" th:each="error: ${#fields.errors('addFishName')}">
+                        [[ ${error} ]]
+                    </div>
+                </div>
+                <div>
+                    <label class="required">サイズ</label>
+                    <input type="number" th:field="*{addFishSize}" class="base-text">
+                    <!--                <input type="text" name="size" title="数字のみを入力してください。" oninput="validateNumberInput(this);" class="base-text">-->
+                    <div class="error" th:each="error: ${#fields.errors('addFishSize')}">
+                        [[ ${error} ]]
+                    </div>
+                </div>
+                <div>
+                    <label class="required">日付</label>
+                    <input type="text" th:field="*{date}" name="price" id="date" class="base-text"
+                           placeholder="yyyy-MM-ddで入力">
+                    <input type="button" value="現在の日付" onclick="displayCurrentDateTime()">
+                    <div class="error" th:each="error: ${#fields.errors('date')}">
+                        [[ ${error} ]]
+                    </div>
+                </div>
+                <div>
+                    <label>天気</label>
+                    <input type="text" th:field="*{weather}" name="price" class="base-text">
+                </div>
+
+                <div class="select_block">
+                    <label class="required">潮</label>
+                    <select name="categoryId" class="base-text" th:field="*{tideId}">
+                        <option th:each="tides : ${tideList}" th:value="${tides.id}"
+                                th:text="${tides.tide_kinds}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="select_block">
+                    <label class="required">場所</label>
+                    <select name="categoryId" class="base-text" th:field="*{placeId}">
+                        <option th:each="places : ${placeList}" th:value="${places.id}">[[${places.place_name}]]
+                        </option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>釣果説明</label>
+                    <textarea th:field="*{addFishDescription}" name="description" class="base-text"></textarea>
+                </div>
+                <div>
+                    <label>画像</label>
+                    <input type="file"  name="file" id="fileInput" multiple accept=”image/*” th:webkitRelativePath="*{imgPath}">
+                </div>
+            </fieldset>
+            <div class="btns">
+                <button type="button" onclick="openModal()" class="basic-btn">更新</button>
+                <input type="button" onclick="location.href='/infolist'" value="メニューに戻る" class="cancel-btn">
+            </div>
+            <div id="modal">
+                <p class="modal-message">更新しますか？</p>
+                <div class="btns">
+                    <button type="submit" id="update-btn" class="basic-btn">更新</button>
+                    <button type="button" onclick="closeModal()" class="cancel-btn">キャンセル</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="fadeLayer"></div>
+<script src="/js/commons.js"></script>
+<script>
+    'use strict'
+    document.getElementById('update-btn').addEventListener('click', () => {
+      location.href = './infolist'
+    });
+
+    const fileInput = document.getElementById('fileInput');
+    const selectedFilePathElement = document.getElementById('selectedFilePath');
+
+    fileInput.addEventListener('change', (event) => {
+        const selectedFile = event.target.files[0];
+        if (selectedFile) {
+            selectedFilePathElement.textContent = selectedFile.name;
+        } else {
+            selectedFilePathElement.textContent = '';
+        }
+    });
+</script>
+</body>
+</html>

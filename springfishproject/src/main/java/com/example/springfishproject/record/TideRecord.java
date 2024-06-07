@@ -1,4 +1,4 @@
 package com.example.springfishproject.record;
 
-public class TideRecord {
+public record TideRecord(int id, String tide_kinds) {
 }
